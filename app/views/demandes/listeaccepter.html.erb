@@ -1,0 +1,99 @@
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+<p id="notice"><%= notice %></p>
+
+<% unless @demandes.nil? %>
+<h1> Demandes</h1>
+        <%= form_tag demandelisteaccepter_path, :method => 'get' do %>
+
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+              <div class="input-group input-group-lg">
+                <%= text_field_tag :recherche_demande, params[:recherche_demande],class:"form-control form-control-lg" ,placeholder: "Type your keywords here",type:"search"%>
+
+                <div class="input-group-append">
+
+                  <%= submit_tag "Search" , class:"btn btn-lg btn-default" %>
+
+                  <%= link_to  demandelisteaccepter_path,class:"btn btn-success" do %>
+
+                    Retour
+                  <% end %>
+
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        <% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+   
+      <th>demande</th>
+      <th>status</th>
+      <th>client</th>
+      <th>technicien</th>
+      
+    </tr>
+  </thead>
+
+  <tbody>
+  
+ <% @demandes.each do |demande| %>
+     <tr>
+     <% if demande.status == 'accepter' %>
+      
+     <td><%= demande.body %></td>
+      
+       
+      <td><strong><p class="text-success"><%= demande.status %></p></strong></td>
+     
+     
+       <td><%= demande.sender.full_name %>  </td>
+       
+      <td><%= demande.recipient.full_name %></td>
+      
+     
+ 
+      <% end %>
+       
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<% end %>
+      <%= paginate @demandes %>
+    </div>
+
+    <!-- /.content -->
+  </div>
+
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+

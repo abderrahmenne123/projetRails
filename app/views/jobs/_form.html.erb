@@ -1,0 +1,56 @@
+<%= form_with(model: job , local: true) do |form| %>
+
+    <% if job.errors.any? %>
+
+      <div id="error_explanation">
+        <h2><%= pluralize(job.errors.count, "error") %> prohibited this user from being saved:</h2>
+        
+  
+        <ul>
+
+          <% job.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+
+        </ul>
+      </div>
+
+    <% end %>
+
+  <div class="col-md-6">
+    <div class="card card-secondary">
+      <div class="card-header">
+        <h3 class="card-title"> New Job </h3>
+
+        <div class="card-tools">
+          <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+            <i class="fas fa-minus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="card-body">
+        <div class="form-group">
+          <label for="inputName">Job Name</label>
+
+          <%= form.text_field :name, autofocus: true,class:"form-control" %>
+
+
+
+
+
+        </div>
+        <div class="row">
+          <div class="col-6">
+
+            <div class="actions">
+              <%= form.submit "Update Job" ,class:"btn btn-success float-right"%>
+            </div>
+
+          </div>
+        </div>
+      </div>
+      <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+  </div>
+  <% end %>

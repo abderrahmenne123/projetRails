@@ -1,0 +1,218 @@
+<aside class="main-sidebar sidebar-dark-primary elevation-4">
+  <!-- Brand Logo -->
+  <a href="/" class="brand-link">
+    <%= image_tag ("workk.jpg"), width:"40" ,height:"40",class:"img-circle elevation-2"%>
+    <span class="brand-text font-weight-light">Work</span>
+  </a>
+
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <% if current_user.avatar.attached? %>
+          <%= image_tag current_user.avatar , class:"img-circle elevation-2" %>
+        <% else %>
+          <%= image_tag ("aa.png") , class:"img-circle elevation-2" %>
+        <%end %>
+      </div>
+      <div class="info">
+        <%= link_to  user_path(current_user),class:"d-block" do %>
+
+          <%=current_user.full_name %>
+        <%end %>
+      </div>
+    </div>
+
+    <!-- SidebarSearch Form -->
+
+
+    <!-- Sidebar Menu -->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+        <!-- Add icons to the links using the .nav-icon class
+             with font-awesome or any other icon font library -->
+        <% if user_signed_in? %>
+
+          <li class="nav-item">
+
+            <a class="nav-link" <%= link_to  user_path(current_user)do %>
+
+
+              <i class="nav-icon far fa-circle text-danger"></i>
+
+              <p class="text">Profile</p>
+            <%end %>
+            </a>
+
+          </li>
+
+
+          <% if current_user.role == 'supadmin' %>
+            <li class="nav-item menu-open">
+              <a href="" class="nav-link active">
+                <i class="nav-icon fas fa-tachometer-alt"></i>
+                <p>
+                  Dashboard
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+
+                <li class="nav-item">
+
+                  <%= link_to  users_path(current_user) ,class: "nav-link" do %>
+                    <i class="fas fa-users nav-icon"></i>
+                    <p>Users</p>
+                  <% end %>
+                </li>
+
+              </ul>
+            </li>
+
+
+            <li class="nav-item">
+              <a href="" class="nav-link">
+
+                <i class="nav-icon fas fa-briefcase"></i>
+                <p>
+                  Job
+                  <i class="right fas fa-angle-left"></i>
+                </p>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <%= link_to  new_job_path,class:"nav-link" do%>
+                    <i class="far fa-plus-square nav-icon"></i>
+                    <p>Ajouter</p>
+                  <%end %>
+                </li>
+                <li class="nav-item">
+
+                  <%= link_to   jobs_path(),class:"nav-link" do %>
+
+                    <i class="far fa-list-alt nav-icon"></i>
+                    <p>Liste</p>
+                  <%end %>
+                </li>
+
+
+              </ul>
+            </li>
+          <%end %>
+          <li class="nav-item">
+            <a href="" class="nav-link">
+
+              <i class="fas fa-id-card nav-icon"></i>
+              <p>
+                JobProfile
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <% if current_user.role == 'technicien' %>
+<%if current_user.jobprofile.blank?%>
+                  <%= link_to new_jobprofile_path,class:"nav-link" do%>
+
+                    <i class="far fa-plus-square nav-icon"></i>
+                    <p>Ajouter</p>
+                    <%end%>
+                  <% end %>
+                <% end %>
+              </li>
+              <li class="nav-item">
+
+                <%= link_to jobprofiles_path(),class:"nav-link" do %>
+                  <i class="far fa-circle nav-icon"></i>
+
+                  <p>Liste</p>
+                <%end %>
+              </li>
+              <a class="nav-link"> </a>
+            </ul>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a href="" class="nav-link">
+              <i class="nav-icon fas fa-chart-pie"></i>
+              <p>
+                Planning
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <% if current_user.role == 'technicien' %>
+
+                  <%= link_to new_planning_path,class:"nav-link" do%>
+
+                    <i class="far fa-plus-square nav-icon"></i>
+                    <p>Ajouter</p>
+                  <% end %>
+                <% end %>
+              </li>
+              <li class="nav-item">
+
+                <%= link_to plannings_path(),class:"nav-link" do %>
+                  <i class="far fa-calendar-check nav-icon"></i>
+                  <p>Liste</p>
+                <%end %>
+              </li>
+              <a class="nav-link"> </a>
+            </ul>
+          </li>
+
+
+
+          <li class="nav-item">
+            <a href="" class="nav-link">
+
+              <i class="fas fa-envelope-open-text nav-icon"></i>
+              <p>
+                Demande
+                <i class="right fas fa-angle-left"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+
+              <li class="nav-item">
+
+                <%= link_to  demandelisteaccepter_path(),class:"nav-link" do %>
+                  <i class="nav-icon far fa-circle text-success"></i>
+                  <p>Liste Accepter</p>
+                <%end %>
+              </li>
+              <li class="nav-item">
+                <%= link_to  demandelisterefuser_path(),class:"nav-link" do %>
+                  <i class="nav-icon far fa-circle text-danger"></i>
+                  <p>Liste Refuser</p>
+                <%end %>
+              </li>
+              <li class="nav-item">
+
+                <%=  link_to   demandes_path	,class:"nav-link" do %>
+                  <i class="nav-icon far fa-circle text-warning"></i>
+                  <p>Liste en cours</p>
+                <%end %>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+
+            <%=  link_to   conversations_path	,class:"nav-link" do %>
+              <i class="nav-icon far fa-envelope"></i>
+              <p>Conversation</p>
+            <%end %>
+          </li>
+          </ul>
+        <%end %>
+
+
+        </nav>
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>

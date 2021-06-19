@@ -1,0 +1,124 @@
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+<p id="notice"><%= notice %></p>
+
+<h1>Users</h1>
+<%= form_tag users_path, :method => 'get' do %>
+
+
+
+      <div class="row">
+        <div class="col-md-8 offset-md-2">
+
+            <div class="input-group input-group-lg">
+              <%= text_field_tag :search, params[:search],class:"form-control form-control-lg" ,placeholder: "Type your keywords here",type:"search"%>
+
+              <div class="input-group-append">
+
+                <%= submit_tag "Search" , class:"btn btn-lg btn-default" %>
+
+                <%= link_to  users_path,class:"btn btn-success" do %>
+
+                  Retour
+                <% end %>
+
+
+              </div>
+            </div>
+
+        </div>
+      </div>
+      <% end %>
+    </br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+    <th>Avatar</th>
+
+      <th>FirstName</th>
+      <th>LastName</th>
+      <th>Email</th>
+      <th>Mobile</th>
+      <th>admin</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @users.each do |user| %>
+      <tr>
+      <td>
+      <% if user.avatar.attached? %>
+          <%= image_tag user.avatar ,style: "width: 50px;height:50px; display: block" %></div>
+      <% else %>
+      <%= image_tag ("aa.png") ,style: "width: 50px;height:50px; display: block" %>
+      <% end %>
+      </td>
+
+        <td><%= user.firstname %></td>
+        <td><%= user.lastname %></td>
+        <td><%= user.email %></td>
+        <td><%= user.mobile %></td>
+        <td><%= user.role %></td>
+
+        <td ><%= link_to  user,class:"btn btn-primary btn-sm" do %>
+
+      <i class="fas fa-folder">
+      </i>
+      View
+    <%end %></td>
+
+
+
+        <td><%= link_to  edit_user_path(user),class:"btn btn-info btn-sm" do %>
+
+            <i class="fas fa-pencil-alt">
+            </i>
+            Edit
+            <% end %>
+            </td>
+
+
+        <td><%= link_to  user, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger btn-sm" do %>
+            <i class="fas fa-trash">
+            </i>
+            Delete
+            <%end %>
+            </td>
+
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+    <%= paginate @users %>
+<br>
+<%= link_to 'New User', new_user_path %>
+    </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<%= render "layouts/footer" %>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+
+
+

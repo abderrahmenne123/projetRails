@@ -1,0 +1,46 @@
+<table class="table table-striped">
+  <thead>
+  <tr>
+
+    <th>Date Début</th>
+    <th>Date Fin</th>
+    <th>Status</th>
+    <th>Technicien</th>
+    <th colspan="3"></th>
+  </tr>
+  </thead>
+
+  <tbody>
+
+  <% @plannings.each do |planning| %>
+    <tr>
+
+      <td><%= planning.date_debut %> </td>
+
+      <td><%= planning.date_fin %></td>
+      <% if planning.status == 'disponible' %>
+        <td> <strong><p class="text-success"><%= planning.status %></p></strong></td>
+      <%end %>
+      <% if planning.status == 'engagées' %>
+        <td> <strong><p class="text-danger"><%= planning.status %></p></strong></td>
+      <%end %>
+      <td> <%= planning.jobprofile.user.full_name %></strong></h5></td>
+      <td><%= link_to  planning ,class:"btn btn-primary btn-sm" do %><i class="fas fa-folder">
+
+      </i>
+          View<%end %></td>
+      <td><%= link_to  edit_planning_path(planning) ,class:"btn btn-info btn-sm" do %><i class="fas fa-pencil-alt">
+      </i>
+          Edit
+        <% end %></td>
+      <td><%= link_to  planning, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger btn-sm" do %>
+          <i class="fas fa-trash">
+          </i>
+          Delete
+        <%end %>
+      </td>
+
+    </tr>
+  <% end %>
+  </tbody>
+</table>

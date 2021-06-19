@@ -1,0 +1,63 @@
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+<h1 class="title is-4">Message <%= @conversation.recipient.full_name %></h1>
+
+<% if @over_ten %>
+  <%= link_to "Show previous", '?m=all', class:'button is-link' %>
+<% end %>
+
+<div id="messages" class="mb4">
+  <% @messages.each do |message| %>
+    <% if message.body %>
+      <% user = User.find(message.user_id) %>
+      <article class="message is-dark">
+        <div class="message-body">
+
+          <div class="inline-block"><strong><%= user.full_name %></strong> <%= message.created_at %></div>
+          <div class="block pt4">
+          <div class="f4"><%= message.body %></div>
+          </div>
+        </div>
+      </article>
+    <% end %>
+  <% end %>
+</div>
+
+<%= form_for [@conversation, @message] do |f| %>
+  <%= f.text_area :body, class: 'form-control', placeholder: "Inquire about a trade..." %>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden"  %>
+
+        <%= hidden_field_tag "chat_id",[@message.conversation.sender_id,@message.conversation.recipient_id ].sort.join("")  %>
+  <div class="text-align-right">
+
+    <%= f.submit "Send message" %>
+  </div>
+<% end %>
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

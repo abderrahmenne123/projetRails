@@ -1,0 +1,106 @@
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+
+      <div class="notice"><%= notice %></div>
+      <div class="alert"><%= alert %></div>
+      <div class="row">
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box">
+            <span class="info-box-icon bg-info elevation-1"><i class="nav-icon far fa-envelope"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Demand</span>
+              <span class="info-box-number">
+                  <%= Demande.count %>
+
+                </span>
+
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-danger elevation-1"><i class="fas fa-users-cog"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Job</span>
+              <span class="info-box-number"><%= Job.count %></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+
+        <!-- fix for small devices only -->
+        <div class="clearfix hidden-md-up"></div>
+
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-success elevation-1"><i class="fas fa-shopping-cart"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Jobprofile</span>
+              <span class="info-box-number"><%= Jobprofile.count %></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <!-- /.col -->
+        <div class="col-12 col-sm-6 col-md-3">
+          <div class="info-box mb-3">
+            <span class="info-box-icon bg-warning elevation-1"><i class="fas fa-users"></i></span>
+
+            <div class="info-box-content">
+              <span class="info-box-text">Members</span>
+              <span class="info-box-number"><%= User.count %></span>
+            </div>
+            <!-- /.info-box-content -->
+          </div>
+          <!-- /.info-box -->
+        </div>
+        <div class="col-12 col-sm-6 col-md-6">
+        <%= line_chart Demande.group(:status).count %>
+        </div>
+        <div class="col-12 col-sm-6 col-md-6">
+        <%= pie_chart User.group(:role).count %>
+        </div>
+        
+        
+        <!-- /.col -->
+      </div>
+      <!-- /.row -->
+
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

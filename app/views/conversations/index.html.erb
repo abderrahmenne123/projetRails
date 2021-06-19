@@ -1,0 +1,98 @@
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+
+<div class="columns">
+  
+    <h3 class="title is-1">All Users</h3>
+  <%= form_tag conversations_path, :method => 'get' do %>
+
+    <div class="row">
+      <div class="col-md-8 offset-md-2">
+
+        <div class="input-group input-group-lg">
+          <%= text_field_tag :search, params[:search],class:"form-control form-control-lg" ,placeholder: "Type your keywords here",type:"search"%>
+
+          <div class="input-group-append">
+
+            <%= submit_tag "Search" , class:"btn btn-lg btn-default" %>
+
+            <%= link_to  conversations_path,class:"btn btn-success" do %>
+
+              Retour
+            <% end %>
+
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  <% end %>
+    <table class="table table-striped">
+    <thead>
+      <tr>
+     
+        <th>Contacts</th>
+        
+        
+      </tr>
+    </thead>
+  
+    <tbody>
+    <% @users.each do |user| %>
+        <% if current_user.id != user.id  %>
+            <tr>
+            <td>
+              <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                <div class="image">
+                  <% if user.avatar.attached? %>
+                    <%= image_tag user.avatar , class:"img-circle elevation-2" %>
+                  <% else %>
+                    <%= image_tag ("aa.png") , class:"img-circle elevation-2" %>
+                  <%end %>
+                </div>
+                <div class="info">
+                  <%= link_to "Message #{user.full_name}", conversations_path(sender_id: current_user.id, recipient_id: user.id), method: "post" %>
+                </div>
+              </div>
+             </td>
+            
+            </tr>
+           <% end %>
+    <% end %>
+  </tbody>
+
+
+  </table>
+  <%= paginate  @users %>
+  </div>
+
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>

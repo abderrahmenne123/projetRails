@@ -1,0 +1,91 @@
+<html>
+<head>
+  <title>Devisetest</title>
+
+  <%= csrf_meta_tags %>
+
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+<div class="container my-6">
+</br>
+  <% flash.each do |name, msg|%>
+    <div class="col-3">
+    <div class='alert alert-<%=name %>'>
+      <div class="text-center">
+      <%=msg %>
+      </div>
+    </div>
+    </div>
+  <% end %>
+<div class="row text-center">
+
+
+  <div class="container-fluid">
+
+      <div class="col-8">
+
+        <!-- Profile Image -->
+        <div class="card card-primary card-outline">
+          <div class="card-body box-profile">
+            <p><h3><strong>Metier: </strong></h3></p>
+
+            <h3 class="profile-username text-center"></h3>
+
+            <p class="text-muted text-center"></p>
+
+            <ul class="list-group list-group-unbordered mb-3">
+              <li class="list-group-item">
+                <h2><%= @job.name %> </h2> <a class="float-right"></a>
+              </li>
+
+            </ul>
+
+
+          </div>
+          <!-- /.card-body -->
+        </div>
+
+
+</div>
+    </div>
+
+
+
+
+
+
+</div>
+</div>
+
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

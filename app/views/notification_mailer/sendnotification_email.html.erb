@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+</head>
+<body>
+<h1>Bonjour <%= @user.full_name %></h1>
+<p>
+  <% if @context== "accepter" %>
+  <div class="text-success">
+    <strong>votre demande a été acceptée</strong>
+    <p> Par le Technicien : <%= @test.full_name %></p>
+  </div>
+<% elsif @context== "refuser"  %>
+
+
+  <strong class="text-danger"> votre demande a été refusée</strong>
+  <p> Par le Technicien : <strong><%= @test.full_name %></strong></p>
+
+<%else %>
+  <p> nouvelle demande de Ms <strong> <%= @test.full_name %></strong></p>
+<%end %>
+
+</p>
+</body>
+</html>

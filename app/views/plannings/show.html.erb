@@ -1,0 +1,112 @@
+<html>
+<head>
+  <title>Devisetest</title>
+
+  <%= csrf_meta_tags %>
+
+
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
+</head>
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+      <div class="container my-6">
+        </br>
+        <% flash.each do |name, msg|%>
+          <div class="col-3">
+            <div class='alert alert-<%=name %>'>
+              <div class="text-center">
+                <%=msg %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+        <div class="row text-center">
+
+
+          <div class="container-fluid">
+
+            <div class="col-8">
+
+              <!-- Profile Image -->
+              <div class="card card-primary card-outline">
+                <div class="card-body box-profile">
+
+                  <p><h3><strong>Planning Of Technicien:</strong></h3></p>
+                  <% if @planning.status == 'disponible' %>
+                  <%= image_tag ("dis.png") ,class:"profile-user-img img-fluid img-circle",style: "width: 200px; height:200px; display: block" %>
+                    <%end %>
+                  <% if @planning.status == 'engagées' %>
+                    <%= image_tag ("ndis.jpg") ,class:"profile-user-img img-fluid img-circle",style: "width: 200px; height:200px; display: block" %>
+                    <%end %>
+                  <h3 class="profile-username text-center"></h3>
+
+                  <p class="text-muted text-center"></p>
+
+                  <ul class="list-group list-group-unbordered mb-3">
+                    <li class="list-group-item">
+                      <h2> Date début : <%= @planning.date_debut %> </h2> <a class="float-right"></a>
+                      <i class="fas fa-arrow-alt-circle-down"></i><i class="fas fa-arrow-alt-circle-down"></i><i class="fas fa-arrow-alt-circle-down"></i><i class="fas fa-arrow-alt-circle-down"></i>
+                      <h2> Date Fin : <%= @planning.date_fin %> </h2> <a class="float-right"></a></li><br>
+
+                    <% if @planning.status == 'disponible' %>
+                      <h2> <strong><p class="d-inline p-2 bg-success text-white"><%= @planning.status %></p></strong></h2><a class="float-right"></a>
+                    <%end %>
+                    <% if @planning.status == 'engagées' %>
+                      <h2> <strong><p class="d-inline p-2 bg-danger text-white"><%= @planning.status %></p></strong></h2><a class="float-right"></a>
+                    <%end %>
+
+
+
+
+
+
+                    </li>
+
+                  </ul>
+
+
+                </div>
+                <!-- /.card-body -->
+              </div>
+
+
+            </div>
+          </div>
+
+
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

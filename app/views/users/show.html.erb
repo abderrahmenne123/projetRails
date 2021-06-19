@@ -1,0 +1,78 @@
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+
+    <div class="content">
+
+      <div class="container-fluid">
+        <div class="row-cols-12">
+          <div class="col-md-3">
+
+            <!-- Profile Image -->
+            <div class="card card-primary card-outline">
+              <div class="card-body box-profile">
+                <div class="text-center">
+                  <div> <% if @user.avatar.attached? %>
+                    <%= image_tag @user.avatar ,style: "width: 100px;height:100px; display: block",class:"profile-user-img img-fluid img-circle" %></div>
+
+                    <% else %>
+                      <div>
+                    <%= image_tag ("aa.png") ,class:"profile-user-img img-fluid img-circle",style: "width: 100px;height:100px; display: block" %>
+                      </div>
+                      </div>
+                  <% end %>
+                </div>
+
+              <h3 class="profile-username text-center"><%= @user.full_name %> </h3>
+
+              <p class="text-muted text-center"><%= @user.email %></p>
+
+                <ul class="list-group list-group-unbordered mb-3">
+                  <li class="list-group-item">
+                    <p>&nbsp;&nbsp;&nbsp;<strong>Mobile: &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; </strong> <%= @user.mobile %> </p>
+                  </li>
+                  <li class="list-group-item">
+                    <p>&nbsp;&nbsp;&nbsp;<strong>Role:&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;</strong> <%= @user.role %> </p>
+                  </li>
+
+                </ul>
+
+                  <%= link_to  edit_user_path(),class:"btn btn-primary btn-block" do %>
+                    <b>Edit Profil</b>
+                  <%end %>
+              </div>
+              <!-- /.card-body -->
+            </div>
+
+    </div>
+        </div>
+      </div>
+
+    </div>
+
+  <!-- /.content -->
+
+</div>
+
+<!-- /.content-wrapper -->
+<%= render "layouts/footer" %>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>

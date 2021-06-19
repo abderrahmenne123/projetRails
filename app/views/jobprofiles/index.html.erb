@@ -1,0 +1,117 @@
+
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+<p id="notice"><%= notice %></p>
+
+<% unless @jobprofiles.nil? %>
+<h1> Job Profiles</h1>
+        <% if current_user.role == 'client' || current_user.role == 'supadmin' %>
+<%= form_tag jobprofiles_path, :method => 'get' do %>
+
+
+
+          <div class="row">
+            <div class="col-md-8 offset-md-2">
+
+              <div class="input-group input-group-lg">
+                <%= text_field_tag :recherche_mot, params[:recherche_mot],class:"form-control form-control-lg" ,placeholder: "Type your keywords here",type:"search"%>
+
+                <div class="input-group-append">
+
+                  <%= submit_tag "Search" , class:"btn btn-lg btn-default" %>
+                  <%= link_to  jobprofiles_path,class:"btn btn-success" do %>
+
+                    Retour
+                  <% end %>
+
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+  <% end %>
+        <% end %>
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>adresse</th>
+      <th>ville</th>
+      <th>gallery</th>
+      <th>tarif</th>
+      <th>user</th>
+      
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+  
+    <% @jobprofiles.each do |jobprofile| %>
+    <tr>
+      <td><%= jobprofile.latitude %></td>
+      <td><%= jobprofile.langitude %></td>
+       
+      <td><%= jobprofile.adresse %></td>
+      <td><%= jobprofile.ville %></td>
+      <td>
+
+      <% (0...jobprofile.gallery.count).each do |gallery| %>
+        <%= image_tag jobprofile.gallery[gallery], style: "width: 100px; height:100px;" "card-img-top" %>
+        <% end %>
+      </td>
+      <td><%= jobprofile.tarif %> DT</td>
+      <td><%= jobprofile.user.full_name %></td>
+
+     
+     
+        <td><%= link_to 'Show', jobprofile ,class: "btn btn-primary" %></td>
+      <% if current_user.role == 'technicien' || current_user.role == 'supadmin' %>
+      
+        <td><%= link_to 'Edit', edit_jobprofile_path(jobprofile) ,class: "btn btn-success"%></td>
+        <td><%= link_to 'Destroy', jobprofile, method: :delete, data: { confirm: 'Are you sure?' } ,class: "btn btn-danger"%></td>
+        
+      </tr>
+      <% end %>
+      <% end %>
+  </tbody>
+</table>
+
+<% end %>
+      <% if current_user.role == 'client' || current_user.role == 'supadmin' %>
+      <%= paginate @jobprofiles %>
+    <% else %>
+
+        <%end %>
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>
+
+

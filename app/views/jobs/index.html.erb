@@ -1,0 +1,103 @@
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content">
+
+      <%= js add_gritter(flash[:success], :title => "Sample gritter app", :sticky => true, :time => 1000, :class_name => "custom_gritter") %>
+<% flash.each do |name, msg|%>
+      <div class='alert alert-<%=name %>'>
+        <%=msg %>
+      </div>
+      <% end %>
+
+<h1>Jobes</h1>
+<%= form_tag jobs_path, :method => 'get' do %>
+
+        <div class="row">
+          <div class="col-md-8 offset-md-2">
+
+            <div class="input-group input-group-lg">
+              <%= text_field_tag :recherche_job, params[:recherche_job],class:"form-control form-control-lg" ,placeholder: "Type your keywords here",type:"search"%>
+
+              <div class="input-group-append">
+
+                <%= submit_tag "Search" , class:"btn btn-lg btn-default" %>
+
+                <%= link_to  jobs_path,class:"btn btn-success" do %>
+
+                  Retour
+                <% end %>
+
+              </div>
+            </div>
+
+          </div>
+        </div>
+  <% end %>
+    </br>
+<table class="table table-striped">
+  <thead>
+    <tr>
+   
+      <th>JOBS</th>
+
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+
+    <% @jobs.each do |job| %>
+      <tr>
+
+        <td><%= job.name %></td>
+       
+        
+        <td><%= link_to  job ,class:"btn btn-primary btn-sm" do %><i class="fas fa-folder">
+        </i>
+            View<%end %></td>
+        <td><%= link_to  edit_job_path(job) ,class:"btn btn-info btn-sm" do %><i class="fas fa-pencil-alt">
+        </i>
+            Edit
+          <% end %></td>
+        <td><%= link_to  job, method: :delete, data: { confirm: 'Are you sure?' },class:"btn btn-danger btn-sm" do %>
+            <i class="fas fa-trash">
+            </i>
+            Delete
+          <%end %>
+            </td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+      <%= paginate @jobs %>
+
+
+    </div>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+  <%= render "layouts/footer" %>
+  <!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
+</html>

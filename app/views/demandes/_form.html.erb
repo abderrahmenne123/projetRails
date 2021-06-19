@@ -1,0 +1,155 @@
+
+<body class="hold-transition sidebar-mini layout-fixed">
+<div class="wrapper">
+
+
+
+  <!-- Navbar -->
+  <%= render "layouts/navbar" %>
+  <!-- /.navbar -->
+
+  <!-- Main Sidebar Container -->
+  <%= render "layouts/sidebar" %>
+
+  <!-- Content Wrapper. Contains page content -->
+
+  <div class="content-wrapper">
+
+    <div class="align-center">
+    <!-- Content Header (Page header) -->
+    <%= simple_form_for([@jobprofile, @jobprofile.demandes.build]) do |f| %>
+      <div class="content">
+
+        <% if @jobprofile.errors.any? %>
+          <div id="error_explanation">
+            <div class=" alert alert-danger">
+              <h2><%= pluralize(@jobprofile.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+              <ul>
+                <% @jobprofile.errors.full_messages.each do |message| %>
+                  <li><%= message %></li>
+                <% end %>
+              </ul>
+            </div>
+          </div>
+        <% end %>
+        </br>
+
+        <div class="col-md-9">
+
+          <div class="card card-secondary">
+            <div class="card-header">
+              <h3 class="card-title"> New Demande </h3>
+
+              <div class="card-tools">
+                <button type="button" class="btn btn-tool" data-card-widget="collapse" title="Collapse">
+                  <i class="fas fa-minus"></i>
+                </button>
+              </div>
+            </div>
+            <div class="card-body">
+              <div class="field">
+                <%= f.label :sender_id,hidden: true  %>
+                <%= f.text_field :sender_id,:value => current_user.id , autofocus: true,hidden: true   %>
+              </div>
+              <div class="form-group">
+
+
+
+                <%= f.text_field :recipient_id ,:value => @jobprofile.user_id , autofocus: true,hidden: true %> </br>
+
+              </div>
+              <div class="form-group">
+
+
+                <%= f.text_field :jobprofile_id , autofocus: true,hidden: true  %>
+
+
+              </div>
+              <div class="field">
+                <%= f.label :status  %>
+                <%= f.text_field :status ,class:"form-control" ,:disabled => true%>
+              </div>
+              <div class="form-group">
+                <label for="inputName">Demande</label>
+                <%= f.text_field :body ,class:"form-control"%>
+
+
+              </div>
+
+              <div class="form-group">
+                <label for="inputName">Date Début</label>
+
+                <%= f.text_field :date_debut,
+
+                                 data: {
+                                   controller: "flatpickr",
+                                   flatpickr_alt_format: t("date.formats.long"),
+                                   flatpickr_date_format: "%B %d, %Y",
+                                   flatpickr_alt_input: true,
+                                   flatpickr_min_date: Time.zone.now
+                                 }, autofocus: true,class:"form-control" %>
+
+              </div>
+              <div class="form-group">
+                <label for="inputName">Date Fin</label>
+
+                <%= f.text_field :date_fin, data: {
+                  controller: "flatpickr",
+                  flatpickr_alt_format: t("date.formats.long"),
+                  flatpickr_date_format: "%B %d, %Y",
+                  flatpickr_min_date: Time.zone.now,
+                  flatpickr_alt_input: true,
+                } %>
+
+              </div>
+
+              <div class="control">
+                <%= f.input :commentaire, input_html: { class: 'form-control' }, wrapper: false, label_html: { class: 'label' }  %>
+              </div>
+              <div class="form-group">
+                <label for="exampleInputFile">Gallery</label>
+                <div class="input-group">
+                  <div class="custom-file">
+
+                    <%= f.file_field :photo, multiple: true ,class:"custom-file-input"%>
+
+                    <label class="custom-file-label" for="exampleInputFile">Choose file</label>
+                  </div>
+                  <div class="input-group-append">
+                    <span class="input-group-text">Upload</span>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-6">
+
+                  <div class="actions">
+                    <%= f.submit "Create New Planning" ,class:"btn btn-success float-right"%>
+                  </div>
+
+                </div>
+              </div>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+
+
+
+      </div>
+    <% end %>
+
+  </div>
+  </div>
+  <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<%= render "layouts/footer" %>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+
+
+</body>
