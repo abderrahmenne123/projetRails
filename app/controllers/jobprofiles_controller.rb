@@ -44,7 +44,7 @@ class JobprofilesController < ApplicationController
       else
         @average_review = @jobprofile.comments.average(:rating).round(2)
       end
-      @plannings = Planning.where(:user_id == @jobprofile.user_id)
+      @plannings = Planning.where(:jobprofile_id == @jobprofile.id)
 
     end
   

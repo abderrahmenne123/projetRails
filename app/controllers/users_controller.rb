@@ -53,7 +53,12 @@ class UsersController < ApplicationController
   def update
     respond_to do |format|
     if @user.update(user_params)
+      if current_user.role == 'supadmin'
       format.html{redirect_to users_url, notice:'accepte modificate'}
+      end
+        if current_user.role == 'client' || current_user.role == 'technicien'
+          format.html{redirect_to root_path, notice:'accepte modificate'}
+        end
     else
       format.html{ render :edit}
     end

@@ -16,14 +16,14 @@
     <!-- Content Header (Page header) -->
     </br>
     <div class="content">
-
+<%if current_user.role == 'client' ||current_user.role == 'supadmin' %>
         <%= link_to  new_jobprofile_demande_path(@jobprofile),class:"btn btn-success " do %>
 
 
           Ajouter Demande
 
         <%end %>
-
+ <%end %>
 
       <div class="container-fluid">
         </br>

@@ -62,5 +62,5 @@ class Jobprofile < ActiveRecord::Base
   end
 
   scope :firstname, lambda {|firstname| where(["firstname LIKE :term", {:term => "%#{firstname}%"}]) }
-  paginates_per 20
+  paginates_per 10
 end

@@ -12,9 +12,9 @@ class PlanningsController < ApplicationController
     # authorize! :manage, :User
 
 
-    @plannings = Planning.all
+   @plannings = Planning.all
 
-
+   # @plannings = Planning.where(:jobprofile_id == @jobprofile.id)
 
   end
 
@@ -33,6 +33,7 @@ class PlanningsController < ApplicationController
   end
   def show
     #@planning = Planning.find(params[:id])
+   # @planningss = Planning.where(:jobprofile_id == @jobprofile.id)
   end
 
   def edit
